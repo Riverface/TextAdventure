@@ -1,0 +1,16 @@
+C:\Users\sonos\Documents\Csharp\obj\Debug\netcoreapp3.0\Csharp.csprojAssemblyReference.cache
+C:\Users\sonos\Documents\Csharp\obj\Debug\netcoreapp3.0\Csharp.AssemblyInfoInputs.cache
+C:\Users\sonos\Documents\Csharp\obj\Debug\netcoreapp3.0\Csharp.AssemblyInfo.cs
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.exe
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.deps.json
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.runtimeconfig.json
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.runtimeconfig.dev.json
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.dll
+C:\Users\sonos\Documents\Csharp\bin\Debug\netcoreapp3.0\Csharp.pdb
+C:\Users\sonos\Documents\Csharp\obj\Debug\netcoreapp3.0\Csharp.dll
+C:\Users\sonos\Documents\Csharp\obj\Debug\netcoreapp3.0\Csharp.pdb
+C:\Users\sonos\Documents\Csharp - Copy\obj\Debug\netcoreapp3.0\Csharp.csprojAssemblyReference.cache
+C:\Users\sonos\Documents\Csharp - Copy\obj\Debug\netcoreapp3.0\Csharp.AssemblyInfoInputs.cache
+C:\Users\sonos\Documents\Csharp - Copy\obj\Debug\netcoreapp3.0\Csharp.AssemblyInfo.cs
+C:\Users\sonos\Documents\Csharp - Copy\obj\Debug\netcoreapp3.0\Csharp.dll
+C:\Users\sonos\Documents\Csharp - Copy\obj\Debug\netcoreapp3.0\Csharp.pdb
