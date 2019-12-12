@@ -1,0 +1,10 @@
+C:\Users\sonos\Documents\TextAdventure\obj\Debug\netcoreapp2.2\TextAdventure.csprojAssemblyReference.cache
+C:\Users\sonos\Documents\TextAdventure\obj\Debug\netcoreapp2.2\TextAdventure.AssemblyInfoInputs.cache
+C:\Users\sonos\Documents\TextAdventure\obj\Debug\netcoreapp2.2\TextAdventure.AssemblyInfo.cs
+C:\Users\sonos\Documents\TextAdventure\bin\Debug\netcoreapp2.2\TextAdventure.deps.json
+C:\Users\sonos\Documents\TextAdventure\bin\Debug\netcoreapp2.2\TextAdventure.runtimeconfig.json
+C:\Users\sonos\Documents\TextAdventure\bin\Debug\netcoreapp2.2\TextAdventure.runtimeconfig.dev.json
+C:\Users\sonos\Documents\TextAdventure\bin\Debug\netcoreapp2.2\TextAdventure.dll
+C:\Users\sonos\Documents\TextAdventure\bin\Debug\netcoreapp2.2\TextAdventure.pdb
+C:\Users\sonos\Documents\TextAdventure\obj\Debug\netcoreapp2.2\TextAdventure.dll
+C:\Users\sonos\Documents\TextAdventure\obj\Debug\netcoreapp2.2\TextAdventure.pdb

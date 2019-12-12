@@ -1,26 +1,79 @@
 using System;
 using System.Collections.Generic;
-using TextAdventure;
+using System.Numerics;
+
 using TextAdventure.TALib;
 
-namespace TextAdventure.MainGame {
+namespace TextAdventure.MainGame
+{
 
-    public class itemfuncs {
-        public void eategg () {
-            Console.WriteLine ("You eat the egg.");
+    public class mainworld
+    {
+        public static void Eategg()
+        {
+            
+            Console.WriteLine("You eat the egg.");
+            Console.WriteLine("The egg begins to consume you.");   
         }
-    }
-    public class mainworld {
+        public static void Main()
+        {
+            bool game = false;
+            World theworld = new World();
+            game = true;
+            string input = "";
+            initWorld(theworld);
+            Console.WriteLine("Butt");
+            theworld.Look();
+            while (game == true)
+            {
+                input = Console.ReadLine();
+                switch (input.Split(' ')[0])
+                {
+                    case "use":
+                       if (input.Split(' ').Length > 1)
+                        {
+                            theworld.itemSearch(input.Split(" ")[1]).UseItem();
+                        }
+                        else
+                        {
+                            theworld.Look();
+                        }
+                        break;
+                    case "look":
+                        if (input.Split(' ').Length > 1)
+                        {
+                            theworld.Look(theworld.itemSearch(input.Split(" ")[1]));
+                        }
+                        else
+                        {
+                            theworld.Look();
+                        }
+                        break;
+                    case "go":
+                        if (theworld.readRoom(theworld.directions[input.Split(' ')[1]] + theworld.user.position) == null)
+                        {
+                            Console.WriteLine("No?");
+                        }
+                        theworld.dirGo(input.Split(' ')[1]);
+                        theworld.Look();
+                        break;
+                    default:
+                        Console.WriteLine("What exactly does " + input + " Mean?");
+                        break;
+                }
+            }
+        }
+        public static void initWorld(World activeworld)
+        {
+            gameAction eggeat = Eategg;
+            activeworld.addRoom(new Room("Bedroom", "Your room. To your SOUTH is the door to the hallway."), new Vector3(0, 0, 0));
+            Item egg = new Item("egg", new List<gameAction>() { eggeat}, "E G G", new Vector3(0, 0, 0));
+            activeworld.addRoom(new Room("Hallway", "Hall leading to bathroom and downstairs"), new Vector3(0, -1, 0));
 
-        public static void Main () {
-            World theworld = new World ();
-            initWorld (theworld);
-        }
-        public static void initWorld (World activeworld) {
-            gameAction eategg = eategg();
-            Item egg = new Item ("egg", List<Action> actions(eategg), "It's an egg.");
-            for (int eggcount = 0; eggcount < 45; eggcount++) {
-                switch (eggcount) {
+            for (int eggcount = 0; eggcount < 45; eggcount++)
+            {
+                switch (eggcount)
+                {
                     case 0:
                         egg.description = "Some";
                         break;
@@ -163,9 +216,9 @@ namespace TextAdventure.MainGame {
                         egg.description = "Only shooting stars break the mold.";
                         break;
                 }
-
+                activeworld.readRoom(new Vector3(0, 0, 0)).items.Add(egg);
             }
-
         }
+ 
     }
 }
