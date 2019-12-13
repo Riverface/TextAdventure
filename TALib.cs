@@ -103,6 +103,9 @@ namespace TextAdventure.TALib
             {
                 Console.WriteLine("There is a " + thing.name + ".");
             }
+            foreach(string exit in readRoom(user.position).exits.Keys){
+            Console.WriteLine("There is an exit to the " + exit + ". It leads to the " + readRoom(user.position + directions[exit]).Name + ".");
+            }
         }
         public void Look(Item lookedat)
         {

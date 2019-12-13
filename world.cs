@@ -170,7 +170,9 @@ namespace TextAdventure.MainGame
             game = true;
             string input = "";
             initWorld(theworld);
+            Console.WriteLine("Today is the day. You've been training for weeks, binging and purging and expanding your palate to finally support the endeavor that will follow. Your objective will be clear soon.");
             theworld.Look();
+            
             while (game == true)
             {
                 input = Console.ReadLine();
@@ -279,7 +281,7 @@ namespace TextAdventure.MainGame
             eggmsg(eggcount);
             eggcount++;
             };
-            Room bedroom = new Room("bedroom", "Your room");
+            Room bedroom = new Room("bedroom", "Your room.");
             bedroom.exits.Add("south", true);
             bedroom.exits.Add("west", false);
             bedroom.blockreasons.Add("south", "You locked yourself into your room in your...Training. The key is in this room somewhere.");
