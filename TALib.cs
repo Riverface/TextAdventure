@@ -6,6 +6,17 @@ namespace TextAdventure.TALib
     public delegate void gameAction();
     public class World
     {
+        public void TakeItem(Item taken)
+        {
+            
+                if (taken.canBeTaken)
+                {
+                    taken.inInventory = true;
+                    user.inventory.Add(taken);
+                    
+                }
+            
+        }
         public Dictionary<Vector3, Room> placegrid;
         public static Dictionary<String, Vector3> cardinals = new Dictionary<string, Vector3>(){
             { "north", new Vector3 (0, 1, 0) },
@@ -20,9 +31,10 @@ namespace TextAdventure.TALib
             { "southeast", new Vector3 (1, -1, 0) }
         };
         public Dictionary<String, Vector3> directions = cardinals;
-        public Player user = new Player();
+        public Player user;
         public World()
         {
+            user = new Player();
             placegrid = new Dictionary<Vector3, Room>();
             user.position = new Vector3(0, 0, 0);
         }
@@ -30,37 +42,83 @@ namespace TextAdventure.TALib
         {
             return placegrid[position];
         }
-        public Item itemSearch(string term){
-        Item founditem = null;
-        foreach(Item found in readRoom(user.position).items){
-            if(term == found.name || term == found.shorthand){
-                founditem = found;
-            }
+        public Item itemSearch(string term)
+        {
+            Item founditem = new Item();
+            foreach (Item found in readRoom(user.position).items)
+            {
+                if (term == found.name || term == found.shorthand)
+                {
+                    founditem = found;
+                }
+                else
+                {
+                    break;
+                }
 
-        }
-        return founditem;
+            }
+            foreach (Item found in user.inventory)
+            {
+                if (term == found.name || term == found.shorthand)
+                {
+                    founditem = found;
+                }
+
+            }
+            return founditem;
         }
         public void addRoom(Room tobeadded, Vector3 Position)
         {
             placegrid.Add(Position, tobeadded);
         }
-        public void dirGo(string direction)
+        public void dirGo(string direction, Room curroom)
         {
-            user.position += directions[direction];
-        }
-        public void Look()
-        {
-            Console.WriteLine(readRoom(user.position).description);
-        }
-        public void Look(Item lookedat)
-        {
-            if (lookedat.pos == user.position)
+            if (directions.ContainsKey(direction))
             {
-                Console.WriteLine(lookedat.description);
+
+                if (curroom.exits.ContainsKey(direction))
+                {
+
+                    if (curroom.exits[direction] == false)
+                    {
+
+                        user.position += directions[direction];
+                    }
+                    else
+                    {
+                        Console.WriteLine(curroom.blockreasons[direction]);
+                    }
+                }
             }
             else
             {
-                Console.WriteLine("Sorry nothing");
+                Console.WriteLine("What?");
+            }
+        }
+        public void Look()
+        {
+
+            Console.WriteLine(readRoom(user.position).description);
+            foreach (Item thing in readRoom(user.position).items)
+            {
+                Console.WriteLine("There is a " + thing.name + ".");
+            }
+        }
+        public void Look(Item lookedat)
+        {
+            if (lookedat == null)
+            {
+                Console.WriteLine("What are you looking at?");
+            }
+            else
+            {
+
+                if (lookedat.pos == user.position || lookedat.inInventory == true)
+                {
+                    Console.WriteLine(lookedat.name);
+                    Console.WriteLine(lookedat.description);
+                }
+
             }
         }
         void Move(string moveExit)
@@ -73,12 +131,18 @@ namespace TextAdventure.TALib
     {
         public string Name;
         public string description;
+        public Dictionary<string, bool> exits;
+        public Dictionary<string, string> blockreasons;
         public List<Item> items;
         public Room(string name, string desc)
         {
             description = desc;
             Name = name;
             items = new List<Item>();
+            exits = new Dictionary<string, bool>
+            { };
+            blockreasons = new Dictionary<string, string>
+            { };
         }
         public Room()
         {
@@ -88,19 +152,23 @@ namespace TextAdventure.TALib
     public class Item
     {
 
-        public static List<gameAction> actions;
+        public List<gameAction> actions;
         public string description;
         public Vector3 pos;
         public bool inInventory;
-        public bool canbetaken;
+        public bool canBeTaken;
         public string shorthand;
         public string name;
-        public Item(string Name, List<gameAction> Actions, string description, Vector3 initpos)
+
+        public Item(string Name, string Description, Vector3 initpos, bool canbetaken)
         {
-            name = Name;            
+            canBeTaken = canbetaken;
+            name = Name;
+            description = Description;
             Vector3 pos = initpos;
-            actions = Actions;
             shorthand = name.Split(' ').ToString();
+            actions = new List<gameAction>();
+            inInventory = false;
         }
         public Item()
         {
@@ -109,11 +177,20 @@ namespace TextAdventure.TALib
 
         public void UseItem()
         {
-            Console.WriteLine(actions);
-            foreach (gameAction action in actions)
+            if (actions.Count > 0)
             {
-                action();
+
+                foreach (gameAction action in actions)
+                {
+                    action();
+                }
             }
+            if (actions.Count == 0)
+            {
+
+                Console.WriteLine("What are you using?");
+            }
+
         }
     }
 
@@ -121,23 +198,13 @@ namespace TextAdventure.TALib
     public class Player
     {
         public Vector3 position;
-        public List<Item> inventory = new List<Item>();
+        public List<Item> inventory;
         public Player()
         {
             position = new Vector3(0, 0, 0);
+            inventory = new List<Item>();
         }
 
-        public void TakeItem(Item taken)
-        {
-            if (taken.pos == this.position)
-            {
 
-                if (taken.canbetaken)
-                {
-                    inventory.Add(taken);
-                    taken = null;
-                }
-            }
-        }
     }
 }
